@@ -19,7 +19,7 @@ ReactDOM.render(
       <Route path="/admin" component={Admin} />
       <Route path="/rtl" component={RTL} />
       <Route path="/forms" component={Forms} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/" to="/forms/user-form" />
     </Switch>
   </Router>,
   document.getElementById('root')

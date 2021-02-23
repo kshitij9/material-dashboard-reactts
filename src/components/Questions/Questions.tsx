@@ -1,49 +1,51 @@
 import React, { useState } from 'react';
+import { Router } from 'react-router';
+import { useHistory } from "react-router-dom";
 
 function Questions({ ...props }: any) {
     const questions = [
 		{
 			questionText: 'Are you a person with disability?',
 			answerOptions: [
-				{ answerText: 'Yes', isCorrect: false },
-				{ answerText: 'No', isCorrect: false }
+				{ answerText: 'Yes' },
+				{ answerText: 'No' }
 			],
 		},
 		{
 			questionText: 'What is you form of disability?',
 			answerOptions: [
-				{ answerText: 'Visual Impairment', isCorrect: false },
-				{ answerText: 'Color Blindness', isCorrect: true },
-				{ answerText: 'Dyslexia', isCorrect: false },
-				{ answerText: 'Others', isCorrect: false },
+				{ answerText: 'Visual Impairment' },
+				{ answerText: 'Color Blindness' },
+				{ answerText: 'Dyslexia' },
+				{ answerText: 'Others' },
 			],
 		},
 		{
 			questionText: 'What is the severity of your disability?',
 			answerOptions: [
-				{ answerText: '20-30%', isCorrect: false },
-				{ answerText: '30-50%', isCorrect: false },
-				{ answerText: '50-70%', isCorrect: false },
-				{ answerText: '70-100%', isCorrect: false },
+				{ answerText: '20-30%' },
+				{ answerText: '30-50%' },
+				{ answerText: '50-70%' },
+				{ answerText: '70-100%' },
 			],
 		},
 		{
 			questionText: 'Would you like to enable our Accessibility settings?',
 			answerOptions: [
-				{ answerText: 'Yes', isCorrect: false },
-				{ answerText: 'No', isCorrect: false },
+				{ answerText: 'Yes' },
+				{ answerText: 'No' },
 			],
 		},
 	];
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-
-	const handleAnswerOptionClick = (isCorrect: boolean) => {
-
+	const history = useHistory();
+	const goToDashboard = () => history.push('/admin/dashboard');
+	const handleAnswerOptionClick = () => {
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
-			//TODO: route to home page
+			goToDashboard();
 		}
 	};
 	return (
@@ -56,9 +58,10 @@ function Questions({ ...props }: any) {
 			</div>
 			<ul className='answer-section'>
 				{questions[currentQuestion].answerOptions.map((answerOption) => (
-					<li onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</li>
+					<li onClick={() => handleAnswerOptionClick()}>{answerOption.answerText}</li>
 				))}
 			</ul>
+			<a onClick={goToDashboard}>Skip</a>
 		</div>
 	);
 }
