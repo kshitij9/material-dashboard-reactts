@@ -46,9 +46,8 @@ function CourseContent(props: any) {
     const { classes } = props;
     const [module, setModule] = React.useState('');
 
-    const handleChange = (event: any) => {
+    const handleChange = (event: any) =>
         setModule(event.target.value);
-    };
     return (
         <Card>
             <CardHeader>
