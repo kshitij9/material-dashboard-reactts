@@ -19,6 +19,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
+import cardImage from '../static/images/cards/data_engineering.jpg'
+import assetManagement from '../static/images/cards/asset_management.jpg'
+import UxDesign from '../static/images/cards/ux_design.png'
 
 
 const drawerWidth = 240;
@@ -45,13 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    card: {
-      root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 140,
-      },
+    cardRoot: {
+      maxWidth: 280,
+    },
+    cardMedia: {
+      height: 140,
     },
   }),
 );
@@ -113,30 +114,68 @@ export default function coursesHome() {
         </Typography>
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={2}>
-              {[0, 1, 2].map((value) => (
-                <Grid key={value} item>
-                  <Card>
-                    <CardActionArea>
-                      <CardMedia
-                        // className={classes.card.media}
-                        // image="/static/images/cards/contemplative-reptile.jpg"
-                        title="Data Engineering"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+            <Grid container justify="center" spacing={4}>
+              <Grid key={0} item>
+                <Card className={classes.cardRoot}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      component="img"
+                      image={cardImage}
+                      title="Data Engineering"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
                         Data Engineering
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                        The ultimate goal of data engineering is to provide organized, 
-                        consistent data flow to enable data-driven work, 
-                        such as: Training machine learning models. Doing exploratory data analysis.
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        The ultimate goal of data engineering is to provide organized,
+                        consistent data flow. Doing exploratory data analysis ...
                         </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              ))}
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+              <Grid key={1} item>
+                <Card className={classes.cardRoot}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={assetManagement}
+                      title="Understand Asset Management"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Asset Management
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        Investments, Pooled funds from clients, capital to work through 
+                        stocks, bonds, real estate, master limited partnerships and ...
+                        </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+              <Grid key={2} item>
+                <Card className={classes.cardRoot}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={UxDesign}
+                      title="UX Design"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        UX Design
+                        </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                      Process of designing (digital or physical) products that are useful, 
+                      easy to use, and delightful to interact with ...
+                        </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
