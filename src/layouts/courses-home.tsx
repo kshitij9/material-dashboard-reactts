@@ -14,6 +14,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Person } from '@material-ui/icons';
+import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Card from '@material-ui/core/Card';
+
 
 const drawerWidth = 240;
 
@@ -38,6 +44,14 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+    },
+    card: {
+      root: {
+        maxWidth: 345,
+      },
+      media: {
+        height: 140,
+      },
     },
   }),
 );
@@ -92,11 +106,40 @@ export default function coursesHome() {
       <main className={classes.content}>
         <Toolbar />
         <Typography paragraph>
-          lalalala lalala sa re ga ma
+          Be Inclusive
         </Typography>
         <Typography paragraph>
-          Home pe aagaye ho
+          Make learning more accessible
         </Typography>
+        <Grid container className={classes.root} spacing={2}>
+          <Grid item xs={12}>
+            <Grid container justify="center" spacing={2}>
+              {[0, 1, 2].map((value) => (
+                <Grid key={value} item>
+                  <Card>
+                    <CardActionArea>
+                      <CardMedia
+                        // className={classes.card.media}
+                        // image="/static/images/cards/contemplative-reptile.jpg"
+                        title="Data Engineering"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                        Data Engineering
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                        The ultimate goal of data engineering is to provide organized, 
+                        consistent data flow to enable data-driven work, 
+                        such as: Training machine learning models. Doing exploratory data analysis.
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
       </main>
     </div>
   );
