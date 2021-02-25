@@ -7,9 +7,9 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
-import Navbar from '../components/Navbars/Navbar';
-import Footer from '../components/Footer/Footer';
-import Sidebar from '../components/Sidebar/Sidebar';
+// import Navbar from '../components/Navbars/Navbar';
+// import Footer from '../components/Footer/Footer';
+// import Sidebar from '../components/Sidebar/Sidebar';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 
 import routes from '../routes';
