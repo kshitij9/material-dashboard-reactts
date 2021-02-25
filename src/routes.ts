@@ -19,6 +19,7 @@ import Language from '@material-ui/icons/Language';
 // core components/views for RTL layout
 // import RTLPage from './views/RTLPage/RTLPage';
 import UserForm from './views/UserForm/userForm';
+import CourseContent from './views/CourseContent/CourseContent';
 
 const dashboardRoutes = [
   // {
@@ -99,6 +100,13 @@ const dashboardRoutes = [
     icon: 'sdf',
     component: UserForm,
     layout: '/forms'
+  },
+  {
+    path: '/course-content',
+    name: 'Course',
+    icon: 'sdf',
+    component: CourseContent,
+    layout: '/admin'
   }
 ];
 

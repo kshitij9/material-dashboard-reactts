@@ -23,21 +23,126 @@ interface State {
   classes: string;
   bg_checked: boolean;
   bgImage: any;
+  themes: any;
+  currentTheme: string;
+  currentTextSize: string;
+  currentTextSpacing: string;
 }
 
+
 class FixedPlugin extends Component<Props, State> {
+  themes: any;
   constructor(props: Props) {
     super(props);
     this.state = {
       classes: 'dropdown show',
       bg_checked: true,
-      bgImage: this.props.bgImage
+      bgImage: this.props.bgImage,
+      themes: {
+        inverted: {
+          'filter': 'invert(100%)'
+        },
+        normal: {
+          'filter': 'none',
+        },
+        desaturate: {
+          'filter': 'saturate(0%)'
+        },        
+        normalTextSize: {
+          'font-size': '14px'
+        },
+        mediumTextSize: {
+          'font-size': '20px'
+        },
+        largeTextSize: {
+          'font-size': '24px'
+        },
+        normalTextSpacing: {
+          'letter-spacing': 'normal'
+        },
+        mediumTextSpacing: {
+          'letter-spacing': '1px'
+        },
+        largeTextSpacing: {
+          'letter-spacing': '2px'
+        }
+      },
+      currentTheme: 'normal',
+      currentTextSize: 'normalTextSize',
+      currentTextSpacing: 'normalTextSpacing'
     };
+    this.themes = {
+
+    }
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
     this.props.handleFixedClick();
   }
+
+  setTheme = (prop: string) => {
+    const theme = this.state.themes[prop];
+    Object.keys(theme).forEach((key) => {
+      const cssKey = `${key}`;
+      const cssValue = theme[key];
+      document.body.style.setProperty(cssKey, cssValue);
+    })
+  }
+
+  toggleTextSize = () => {
+    if(this.state.currentTextSize === 'normalTextSize') {
+      this.setState({
+        currentTextSize: 'mediumTextSize'
+      });
+    } else if(this.state.currentTextSize === 'mediumTextSize'){
+      this.setState({
+        currentTextSize: 'largeTextSize'
+      });
+    }
+    else {
+      this.setState({
+        currentTextSize: 'normalTextSize'
+      });
+    }
+    this.setTheme(this.state.currentTextSize);
+  }
+
+  toggleTheme = () => {
+    if(this.state.currentTheme === 'normal') {
+      this.setState({
+        currentTheme: 'desaturate'
+      });
+    } else if(this.state.currentTheme === 'desaturate'){
+      this.setState({
+        currentTheme: 'inverted'
+      });
+    }
+    else {
+      this.setState({
+        currentTheme: 'normal'
+      });
+    }
+    this.setTheme(this.state.currentTheme);
+  }
+
+  toggleTextSpacing = () => {
+    if(this.state.currentTextSpacing === 'normalTextSpacing') {
+      this.setState({
+        currentTextSpacing: 'mediumTextSpacing'
+      });
+    } else if(this.state.currentTextSpacing === 'mediumTextSpacing'){
+      this.setState({
+        currentTextSpacing: 'largeTextSpacing'
+      });
+    }
+    else {
+      this.setState({
+        currentTextSpacing: 'normalTextSpacing'
+      });
+    }
+    this.setTheme(this.state.currentTextSpacing);
+  }
+
   render() {
     return (
       <div
@@ -119,6 +224,7 @@ class FixedPlugin extends Component<Props, State> {
                 onClick={() => {
                   this.setState({ bgImage: imagine1 });
                   this.props.handleImageClick(imagine1);
+                  this.toggleTheme();
                 }}
               >
                 <img src={imagine1} alt="..." />
@@ -130,6 +236,7 @@ class FixedPlugin extends Component<Props, State> {
                 onClick={() => {
                   this.setState({ bgImage: imagine2 });
                   this.props.handleImageClick(imagine2);
+                  this.toggleTextSize();
                 }}
               >
                 <img src={imagine2} alt="..." />
@@ -141,6 +248,7 @@ class FixedPlugin extends Component<Props, State> {
                 onClick={() => {
                   this.setState({ bgImage: imagine3 });
                   this.props.handleImageClick(imagine3);
+                  this.toggleTextSpacing();
                 }}
               >
                 <img src={imagine3} alt="..." />

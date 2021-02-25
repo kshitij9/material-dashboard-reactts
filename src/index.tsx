@@ -21,7 +21,8 @@ ReactDOM.render(
       {/* <Route path="/rtl" component={RTL} /> */}
       <Route path="/forms" component={Forms} />
       <Route path='/dbLearningAI/home' component={coursesHome}/>
-      <Redirect from="/" to="/dbLearningAI/home" />
+      {/* <Redirect from="/" to="/dbLearningAI/home" /> */}
+      <Redirect from="/" to="/forms/user-form" />
     </Switch>
   </Router>,
   document.getElementById('root')
