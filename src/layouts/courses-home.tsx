@@ -19,6 +19,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import cardImage from '../static/images/cards/data_engineering.jpg'
 import assetManagement from '../static/images/cards/asset_management.jpg'
 import UxDesign from '../static/images/cards/ux_design.png'
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme: Theme) =>
     cardMedia: {
       height: 140,
     },
+    cardAction: {
+      display: 'block',
+      textAlign: 'initial'
+    }
   }),
 );
 
@@ -118,21 +123,31 @@ export default function coursesHome() {
               <Grid key={0} item>
                 <Card className={classes.cardRoot}>
                   <CardActionArea>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      component="img"
-                      image={cardImage}
-                      title="Data Engineering"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Data Engineering
-                        </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        The ultimate goal of data engineering is to provide organized,
-                        consistent data flow. Doing exploratory data analysis ...
-                        </Typography>
-                    </CardContent>
+                    <ButtonBase
+                      className={classes.cardAction}
+                      onClick={
+                        () => {
+                          window.location.pathname = '/dbLearningAI/view-course'
+                        }
+                      }
+                    >
+                      <CardMedia
+                        className={classes.cardMedia}
+                        component="img"
+                        image={cardImage}
+                        title="Data Engineering"
+                      />
+                      <br/>
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          Data Engineering
+                      </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                          The ultimate goal of data engineering is to provide organized,
+                          consistent data flow. Doing exploratory data analysis ...
+                      </Typography>
+                      </CardContent>
+                    </ButtonBase>
                   </CardActionArea>
                 </Card>
               </Grid>
@@ -149,7 +164,7 @@ export default function coursesHome() {
                         Asset Management
                       </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
-                        Investments, Pooled funds from clients, capital to work through 
+                        Investments, Pooled funds from clients, capital to work through
                         stocks, bonds, real estate, master limited partnerships and ...
                         </Typography>
                     </CardContent>
@@ -169,8 +184,8 @@ export default function coursesHome() {
                         UX Design
                         </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
-                      Process of designing (digital or physical) products that are useful, 
-                      easy to use, and delightful to interact with ...
+                        Process of designing (digital or physical) products that are useful,
+                        easy to use, and delightful to interact with ...
                         </Typography>
                     </CardContent>
                   </CardActionArea>
