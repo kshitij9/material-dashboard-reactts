@@ -1,3 +1,4 @@
+import { Switch, Route, Redirect } from 'react-router-dom';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { createStyles, Theme, makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,6 +25,7 @@ import cardImage from '../static/images/cards/data_engineering.jpg'
 import assetManagement from '../static/images/cards/asset_management.jpg'
 import UxDesign from '../static/images/cards/ux_design.png'
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
+import routes from '../routes';
 
 
 const theme = createMuiTheme({
@@ -101,6 +103,23 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 'inherit'
     }
   }),
+);
+
+const switchRoutes = (
+  <Switch>
+    {routes.map((prop, key) => {
+      if (prop.layout === '/dbLearningAI') {
+        console.log(prop)
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
+      }
+    })}
+  </Switch>
 );
 
 export default function coursesHome() {
@@ -257,83 +276,8 @@ export default function coursesHome() {
         <Typography paragraph>
           Make learning more accessible
         </Typography>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justify="center" spacing={4}>
-              <Grid key={0} item>
-                <Card className={classes.cardRoot}>
-                  <CardActionArea>
-                    <ButtonBase
-                      className={classes.cardAction}
-                      onClick={
-                        () => {
-                          window.location.pathname = '/dbLearningAI/view-course'
-                        }
-                      }
-                    >
-                      <CardMedia
-                        className={classes.cardMedia}
-                        component="img"
-                        image={cardImage}
-                        title="Data Engineering"
-                      />
-                      <br/>
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          Data Engineering
-                      </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                          The ultimate goal of data engineering is to provide organized,
-                          consistent data flow. Doing exploratory data analysis ...
-                      </Typography>
-                      </CardContent>
-                    </ButtonBase>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid key={1} item>
-                <Card className={classes.cardRoot}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={assetManagement}
-                      title="Understand Asset Management"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Asset Management
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        Investments, Pooled funds from clients, capital to work through
-                        stocks, bonds, real estate, master limited partnerships and ...
-                        </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-              <Grid key={2} item>
-                <Card className={classes.cardRoot}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={UxDesign}
-                      title="UX Design"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        UX Design
-                        </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        Process of designing (digital or physical) products that are useful,
-                        easy to use, and delightful to interact with ...
-                        </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+
+        {switchRoutes}
       </main>
       {settingsLoaded && <FixedPlugin
         currentTheme={currentTheme}

@@ -40,7 +40,7 @@ function Questions({ ...props }: any) {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [answers, setAnswers] = useState([] as Array<number>);
 	const history = useHistory();
-	const goToDashboard = () => history.push('/dbLearningAI/home');
+	const goToDashboard = () => history.push('/dbLearningAI/dashboard');
 	const handleAnswerOptionClick = (index: number) => {
 		let currentAnswer = answers;
 		currentAnswer.push(index);
