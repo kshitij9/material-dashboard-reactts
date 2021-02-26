@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { createStyles, Theme, makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -36,6 +36,9 @@ const theme = createMuiTheme({
       button: {
         fontSize: 'inherit !important',
         letterSpacing: 'inherit !important'
+      },
+      h5: {
+        fontSize: '1.1em !important'
       }
     }
   },
@@ -98,6 +101,62 @@ export default function coursesHome() {
 
   const [fixedClasses, setFixedClasses] = useState('dropdown ');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState('normal');
+  const [currentTextSize, setCurrentTextSize] = useState('normalTextSize');
+  const [currentTextSpacing, setCurrentTextSpacing] = useState('normalTextSpacing');
+  const [currentCursor, setCurrentCursor] = useState('normalCursor');
+  const [currentThemeTitleIndex, setCurrentThemeTitleIndex] = useState(0);
+  const [currentTextSizeTitleIndex, setCurrentTextSizeTitleIndex] = useState(0);
+  const [currentTextSpacingTitleIndex, setCurrentTextSpacingTitleIndex] = useState(0);
+  const [currentCursorTitleIndex, setCurrentCursorTitleIndex] = useState(0);
+  const [settingsLoaded, setSettingsLoaded] = useState(false);
+  useEffect(() => {
+    const answers = JSON.parse(localStorage.getItem('answers') || '');
+    if(answers) {
+      switch(answers[1]){
+        case 0:
+          setCurrentTheme('normal');
+          setCurrentTextSize('mediumTextSize');
+          setCurrentTextSpacing('mediumTextSpacing');
+          setCurrentCursor('largerCursor');
+          setCurrentThemeTitleIndex(0);
+          setCurrentTextSizeTitleIndex(1);
+          setCurrentTextSpacingTitleIndex(1);
+          setCurrentCursorTitleIndex(1);
+          break;
+        case 1:
+          setCurrentTheme('desaturate');
+          setCurrentTextSize('normalTextSize');
+          setCurrentTextSpacing('normalTextSpacing');
+          setCurrentCursor('normalCursor');  
+          setCurrentThemeTitleIndex(2);
+          setCurrentTextSizeTitleIndex(1);
+          setCurrentTextSpacingTitleIndex(1);
+          setCurrentCursorTitleIndex(1);
+          break;
+        case 2:
+          setCurrentTheme('desaturate');
+          setCurrentTextSize('normalTextSize');
+          setCurrentTextSpacing('normalTextSpacing');
+          setCurrentCursor('normalCursor');
+          setCurrentThemeTitleIndex(2);
+          setCurrentTextSizeTitleIndex(1);
+          setCurrentTextSpacingTitleIndex(1);
+          setCurrentCursorTitleIndex(1);
+          break;
+        default:
+          setCurrentTheme('normal');
+          setCurrentTextSize('normalTextSize');
+          setCurrentTextSpacing('normalTextSpacing');
+          setCurrentCursor('normalCursor');
+          setCurrentThemeTitleIndex(0);
+          setCurrentTextSizeTitleIndex(0);
+          setCurrentTextSpacingTitleIndex(0);
+          setCurrentCursorTitleIndex(0);
+      }
+      setSettingsLoaded(true);
+    }
+  }, []);
   // const handleImageClick = (i: string) => {
   //   this.setState({ image: i });
   // }
@@ -249,10 +308,18 @@ export default function coursesHome() {
           </Grid>
         </Grid>
       </main>
-      <FixedPlugin
-            handleFixedClick={handleFixedClick}
-            fixedClasses={fixedClasses}
-          />
+      {settingsLoaded && <FixedPlugin
+        currentTheme={currentTheme}
+        currentTextSize={currentTextSize}
+        currentTextSpacing={currentTextSpacing}
+        currentCursorSize={currentCursor}
+        currentThemeTitleIndex={currentThemeTitleIndex}
+        currentTextSizeTitleIndex={currentTextSizeTitleIndex}
+        currentTextSpacingTitleIndex={currentTextSpacingTitleIndex}
+        currentCursorTitleIndex={currentCursorTitleIndex}
+        handleFixedClick={handleFixedClick}
+        fixedClasses={fixedClasses}
+      />}
     </div>
 
      </ThemeProvider>

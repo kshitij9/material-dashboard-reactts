@@ -122,8 +122,17 @@ class Forms extends React.Component<Props, State> {
             // handleColorClick={this.handleColorClick}
             // bgColor={this.state.color}
             // bgImage={this.state.image}
+            currentTheme={'normal'}
+            currentTextSize={'normalTextSize'}
+            currentTextSpacing={'normalTextSpacing'}
+            currentCursorSize={'normalCursor'}
+            currentThemeTitleIndex={0}
+            currentTextSizeTitleIndex={0}
+            currentTextSpacingTitleIndex={0}
+            currentCursorTitleIndex={0}
             handleFixedClick={this.handleFixedClick}
             fixedClasses={this.state.fixedClasses}
+
           />
         </div>
     );
