@@ -118,14 +118,12 @@ class Forms extends React.Component<Props, State> {
         <div ref="mainPanel">
           <div>{switchRoutes}</div>
           <FixedPlugin
-            // handleImageClick={this.handleImageClick}
-            // handleColorClick={this.handleColorClick}
-            // bgColor={this.state.color}
-            // bgImage={this.state.image}
             currentTheme={'normal'}
             currentTextSize={'normalTextSize'}
             currentTextSpacing={'normalTextSpacing'}
             currentCursorSize={'normalCursor'}
+            currentFont={'normalFont'}
+            currentFontTitleIndex={0}
             currentThemeTitleIndex={0}
             currentTextSizeTitleIndex={0}
             currentTextSpacingTitleIndex={0}

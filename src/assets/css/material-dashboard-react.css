@@ -602,7 +602,7 @@ button svg {
 button {
   font-size: inherit !important;
   letter-spacing: inherit !important;
-
+  cursor: inherit !important
 }
 
 .user-form {

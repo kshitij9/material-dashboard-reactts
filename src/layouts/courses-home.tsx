@@ -31,7 +31,8 @@ const theme = createMuiTheme({
     MuiTypography: {
       root: {
         fontSize: 'inherit !important',
-        letterSpacing: 'inherit !important'
+        letterSpacing: 'inherit !important',
+        cursor: 'inherit !important',
       },
       button: {
         fontSize: 'inherit !important',
@@ -55,7 +56,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       fontSize: 'inherit',
-      textSpacing: 'inherit'
+      textSpacing: 'inherit',
+      fontFamily: 'inherit !important',
+      height: '100vh !important'
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -73,12 +76,16 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      fontSize: 'inherit !important'
+      fontSize: 'inherit !important',
+      fontFamily: 'inherit !important',
+
     },
     cardRoot: {
       maxWidth: 280,
       fontSize: 'inherit !important',
-      letterSpacing: 'inherit !important'
+      letterSpacing: 'inherit !important',
+      fontFamily: 'inherit !important',
+
     },
     cardMedia: {
       height: 140,
@@ -88,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'initial'
     },
     body1Text: {
-      fontSize: "inherit"
+      fontSize: "inherit",
     },
     bodyFont: {
       fontSize: 'inherit'
@@ -109,6 +116,8 @@ export default function coursesHome() {
   const [currentTextSizeTitleIndex, setCurrentTextSizeTitleIndex] = useState(0);
   const [currentTextSpacingTitleIndex, setCurrentTextSpacingTitleIndex] = useState(0);
   const [currentCursorTitleIndex, setCurrentCursorTitleIndex] = useState(0);
+  const [currentFont, setCurrentFont] = useState('normalFont');
+  const [currentFontTitleIndex, setCurrentFontTitleIndex] = useState(0);
   const [settingsLoaded, setSettingsLoaded] = useState(false);
   useEffect(() => {
     const answers = JSON.parse(localStorage.getItem('answers') || '');
@@ -119,36 +128,54 @@ export default function coursesHome() {
           setCurrentTextSize('mediumTextSize');
           setCurrentTextSpacing('mediumTextSpacing');
           setCurrentCursor('largerCursor');
+          setCurrentFont('normalFont'),
           setCurrentThemeTitleIndex(0);
           setCurrentTextSizeTitleIndex(1);
           setCurrentTextSpacingTitleIndex(1);
           setCurrentCursorTitleIndex(1);
+          setCurrentFontTitleIndex(0);
           break;
         case 1:
           setCurrentTheme('desaturate');
           setCurrentTextSize('normalTextSize');
           setCurrentTextSpacing('normalTextSpacing');
-          setCurrentCursor('normalCursor');  
+          setCurrentCursor('normalCursor');
+          setCurrentFont('normalFont'),  
           setCurrentThemeTitleIndex(2);
           setCurrentTextSizeTitleIndex(1);
           setCurrentTextSpacingTitleIndex(1);
           setCurrentCursorTitleIndex(1);
+          setCurrentFontTitleIndex(0);
           break;
         case 2:
           setCurrentTheme('desaturate');
           setCurrentTextSize('normalTextSize');
           setCurrentTextSpacing('normalTextSpacing');
           setCurrentCursor('normalCursor');
+          setCurrentFont('dyslexicFont')
           setCurrentThemeTitleIndex(2);
           setCurrentTextSizeTitleIndex(1);
           setCurrentTextSpacingTitleIndex(1);
-          setCurrentCursorTitleIndex(1);
+          setCurrentCursorTitleIndex(0);
+          setCurrentFontTitleIndex(1);
           break;
+        // case 3: 
+        //   setCurrentTheme('normal');
+        //   setCurrentTextSize('normalTextSize');
+        //   setCurrentTextSpacing('normalTextSpacing');
+        //   setCurrentCursor('normalCursor');
+        //   setCurrentThemeTitleIndex(2);
+        //   setCurrentTextSizeTitleIndex(1);
+        //   setCurrentTextSpacingTitleIndex(1);
+        //   setCurrentCursorTitleIndex(1);
+        //   break;
         default:
           setCurrentTheme('normal');
           setCurrentTextSize('normalTextSize');
           setCurrentTextSpacing('normalTextSpacing');
           setCurrentCursor('normalCursor');
+          setCurrentFont('normalFont');
+          setCurrentFontTitleIndex(0);
           setCurrentThemeTitleIndex(0);
           setCurrentTextSizeTitleIndex(0);
           setCurrentTextSpacingTitleIndex(0);
@@ -317,6 +344,8 @@ export default function coursesHome() {
         currentTextSizeTitleIndex={currentTextSizeTitleIndex}
         currentTextSpacingTitleIndex={currentTextSpacingTitleIndex}
         currentCursorTitleIndex={currentCursorTitleIndex}
+        currentFont={currentFont}
+        currentFontTitleIndex={currentFontTitleIndex}
         handleFixedClick={handleFixedClick}
         fixedClasses={fixedClasses}
       />}

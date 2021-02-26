@@ -12,7 +12,7 @@ const style = createStyles({
       position: 'relative'
     },
     note: {
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: 'inherit !important',
       bottom: '10px',
       color: '#c0c1c2',
       display: 'block',
@@ -36,7 +36,7 @@ const style = createStyles({
       marginTop: '0px',
       minHeight: 'auto',
       fontWeight: 300,
-      fontFamily: '\'Roboto\', \'Helvetica\', \'Arial\', sans-serif',
+      fontFamily: 'inherit',
       marginBottom: '3px',
       textDecoration: 'none'
     }

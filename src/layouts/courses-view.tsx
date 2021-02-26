@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,6 +20,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
 import de_video from '../static/videos/de_video.mp4';
+import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 
 
 const drawerWidth = 240;
@@ -58,6 +59,92 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function coursesView(){
     const classes = useStyles();
+    const [fixedClasses, setFixedClasses] = useState('dropdown ');
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [currentTheme, setCurrentTheme] = useState('normal');
+    const [currentTextSize, setCurrentTextSize] = useState('normalTextSize');
+    const [currentTextSpacing, setCurrentTextSpacing] = useState('normalTextSpacing');
+    const [currentCursor, setCurrentCursor] = useState('normalCursor');
+    const [currentThemeTitleIndex, setCurrentThemeTitleIndex] = useState(0);
+    const [currentTextSizeTitleIndex, setCurrentTextSizeTitleIndex] = useState(0);
+    const [currentTextSpacingTitleIndex, setCurrentTextSpacingTitleIndex] = useState(0);
+    const [currentCursorTitleIndex, setCurrentCursorTitleIndex] = useState(0);
+    const [currentFont, setCurrentFont] = useState('normalFont');
+    const [currentFontTitleIndex, setCurrentFontTitleIndex] = useState(0);
+    const [settingsLoaded, setSettingsLoaded] = useState(false);
+    useEffect(() => {
+      const answers = JSON.parse(localStorage.getItem('answers') || '');
+      if(answers) {
+        switch(answers[1]){
+          case 0:
+            setCurrentTheme('normal');
+            setCurrentTextSize('mediumTextSize');
+            setCurrentTextSpacing('mediumTextSpacing');
+            setCurrentCursor('largerCursor');
+            setCurrentFont('normalFont'),
+            setCurrentThemeTitleIndex(0);
+            setCurrentTextSizeTitleIndex(1);
+            setCurrentTextSpacingTitleIndex(1);
+            setCurrentCursorTitleIndex(1);
+            setCurrentFontTitleIndex(0);
+            break;
+          case 1:
+            setCurrentTheme('desaturate');
+            setCurrentTextSize('normalTextSize');
+            setCurrentTextSpacing('normalTextSpacing');
+            setCurrentCursor('normalCursor');
+            setCurrentFont('normalFont'),  
+            setCurrentThemeTitleIndex(2);
+            setCurrentTextSizeTitleIndex(1);
+            setCurrentTextSpacingTitleIndex(1);
+            setCurrentCursorTitleIndex(1);
+            setCurrentFontTitleIndex(0);
+            break;
+          case 2:
+            setCurrentTheme('desaturate');
+            setCurrentTextSize('normalTextSize');
+            setCurrentTextSpacing('normalTextSpacing');
+            setCurrentCursor('normalCursor');
+            setCurrentFont('dyslexicFont')
+            setCurrentThemeTitleIndex(2);
+            setCurrentTextSizeTitleIndex(1);
+            setCurrentTextSpacingTitleIndex(1);
+            setCurrentCursorTitleIndex(1);
+            setCurrentFontTitleIndex(1);
+            break;
+          // case 3: 
+          //   setCurrentTheme('normal');
+          //   setCurrentTextSize('normalTextSize');
+          //   setCurrentTextSpacing('normalTextSpacing');
+          //   setCurrentCursor('normalCursor');
+          //   setCurrentThemeTitleIndex(2);
+          //   setCurrentTextSizeTitleIndex(1);
+          //   setCurrentTextSpacingTitleIndex(1);
+          //   setCurrentCursorTitleIndex(1);
+          //   break;
+          default:
+            setCurrentTheme('normal');
+            setCurrentTextSize('normalTextSize');
+            setCurrentTextSpacing('normalTextSpacing');
+            setCurrentCursor('normalCursor');
+            setCurrentFont('normalFont');
+            setCurrentFontTitleIndex(0);
+            setCurrentThemeTitleIndex(0);
+            setCurrentTextSizeTitleIndex(0);
+            setCurrentTextSpacingTitleIndex(0);
+            setCurrentCursorTitleIndex(0);
+        }
+        setSettingsLoaded(true);
+      }
+    }, []);
+
+    const handleFixedClick = () => {
+      if (fixedClasses === 'dropdown') {
+        setFixedClasses('dropdown show');
+      } else {
+        setFixedClasses('dropdown');
+      }
+    }
 
     return (
         <div className={classes.root}>
@@ -132,6 +219,20 @@ export default function coursesView(){
           </Grid>
         </Grid>
         </main>
+        {settingsLoaded && <FixedPlugin
+        currentTheme={currentTheme}
+        currentTextSize={currentTextSize}
+        currentTextSpacing={currentTextSpacing}
+        currentCursorSize={currentCursor}
+        currentThemeTitleIndex={currentThemeTitleIndex}
+        currentTextSizeTitleIndex={currentTextSizeTitleIndex}
+        currentTextSpacingTitleIndex={currentTextSpacingTitleIndex}
+        currentCursorTitleIndex={currentCursorTitleIndex}
+        currentFont={currentFont}
+        currentFontTitleIndex={currentFontTitleIndex}
+        handleFixedClick={handleFixedClick}
+        fixedClasses={fixedClasses}
+      />}
       </div>
     )
 }

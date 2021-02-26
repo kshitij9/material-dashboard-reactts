@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import ComplexButtons from '../ComplexButtons/ComplexButtons';
-
+import logo from '../../assets/img/cursor.png';
 
 interface Props{
   // bgImage: any;
@@ -19,6 +19,8 @@ interface Props{
   currentThemeTitleIndex?: any;
   currentCursorTitleIndex?: any;
   currentCursorSize?: any;
+  currentFont: string;
+  currentFontTitleIndex: number;
 }
 
 interface State {
@@ -33,6 +35,8 @@ interface State {
   currentThemeTitleIndex: number;
   currentCursorTitleIndex: number;
   images: Array<any>;
+  currentFont: string;
+  currentFontTitleIndex: number;
 }
 
 class FixedPlugin extends Component<Props, State> {
@@ -71,20 +75,28 @@ class FixedPlugin extends Component<Props, State> {
           'letter-spacing': '2px'
         },
         largerCursor: {
-          'cursor':"url('src/assets/img/cursor.png'), auto"
+          'cursor':`url(${logo}), auto`
         },
         normalCursor: {
           'cursor': 'default'
-        } 
+        },
+        dyslexicFont: {
+          'font-family': 'Verdana'
+        },
+        normalFont: {
+          'font-family': '"Roboto", "Helvetica", "Arial", sans-serif'
+        }
       },
-      currentTheme: this.props.currentTheme ? this.props.currentTheme : 'normal',
-      currentTextSize: this.props.currentTextSize ? this.props.currentTextSize : 'normalTextSize' ,
-      currentTextSpacing: this.props.currentTextSpacing? this.props.currentTextSpacing : 'normalTextSpacing',
-      currentTextSizeTitleIndex: this.props.currentTextSizeTitleIndex? this.props.currentTextSizeTitleIndex : 0,
-      currentTextSpacingTitleIndex: this.props.currentTextSpacingTitleIndex? this.props.currentTextSpacingTitleIndex : 0,
-      currentThemeTitleIndex: this.props.currentThemeTitleIndex? this.props.currentThemeTitleIndex : 0,
-      currentCursorTitleIndex: this.props.currentCursorTitleIndex?this.props.currentCursorTitleIndex : 0 ,
-      currentCursorSize: this.props.currentCursorSize? this.props.currentCursorSize : 0,
+      currentTheme: this.props.currentTheme|| 'normal',
+      currentTextSize: this.props.currentTextSize|| 'normalTextSize' ,
+      currentTextSpacing: this.props.currentTextSpacing|| 'normalTextSpacing',
+      currentTextSizeTitleIndex: this.props.currentTextSizeTitleIndex|| 0,
+      currentTextSpacingTitleIndex: this.props.currentTextSpacingTitleIndex|| 0,
+      currentThemeTitleIndex: this.props.currentThemeTitleIndex|| 0,
+      currentCursorTitleIndex: this.props.currentCursorTitleIndex|| 0,
+      currentCursorSize: this.props.currentCursorSize|| 0,
+      currentFont: this.props.currentFont || 'normalFont',
+      currentFontTitleIndex: this.props.currentFontTitleIndex || 0,
       images: [
         {
           url: '/static/images/grid-list/breakfast.jpg',
@@ -109,6 +121,12 @@ class FixedPlugin extends Component<Props, State> {
           title: ['Normal Pointer', 'Large Pointer'],
           type: 'POINTER',
           width: '98%'
+        },
+        {
+          url: '',
+          title: ['Normal Font', 'Dyslexia Font'],
+          type: 'FONT',
+          width: '98%'
         }
       ]
     };
@@ -117,6 +135,7 @@ class FixedPlugin extends Component<Props, State> {
     this.setTheme(this.state.currentCursorSize);
     this.setTheme(this.state.currentTheme);
     this.setTheme(this.state.currentTextSpacing);
+    this.setTheme(this.state.currentFont);
   }
 
   handleClick() {
@@ -186,6 +205,21 @@ class FixedPlugin extends Component<Props, State> {
     }
   }
 
+  toggleFont = () => {
+    if(this.state.currentFont === 'normalFont') {
+      this.setState({
+        currentFont: 'dyslexicFont',
+        currentFontTitleIndex: 1
+      },() => {this.setTheme(this.state.currentFont)});
+    } 
+    else {
+      this.setState({
+        currentFont: 'normalFont',
+        currentFontTitleIndex: 0
+      },() => {this.setTheme(this.state.currentFont)});
+    }
+  }
+
   toggleTextSpacing = () => {
     if(this.state.currentTextSpacing === 'normalTextSpacing') {
       this.setState({
@@ -224,6 +258,8 @@ class FixedPlugin extends Component<Props, State> {
               <ComplexButtons image={this.state.images[0]} titleIndex={this.state.currentTextSpacingTitleIndex} handleClick={this.toggleTextSpacing} />
               <ComplexButtons image={this.state.images[2]} titleIndex={this.state.currentThemeTitleIndex} handleClick={this.toggleTheme} /> 
               <ComplexButtons image={this.state.images[3]} titleIndex={this.state.currentCursorTitleIndex} handleClick={this.toggleCursorSize} /> 
+              <ComplexButtons image={this.state.images[4]} titleIndex={this.state.currentFontTitleIndex} handleClick={this.toggleFont} /> 
+
               {/* {this.state.images.map((image) => {
                 switch(image.type) {
                   case 'FONT_SIZE':
