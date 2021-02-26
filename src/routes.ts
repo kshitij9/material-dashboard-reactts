@@ -20,6 +20,8 @@ import Language from '@material-ui/icons/Language';
 // import RTLPage from './views/RTLPage/RTLPage';
 import UserForm from './views/UserForm/userForm';
 import CourseContent from './views/CourseContent/CourseContent';
+import CourseDashboard from './views/dashboard/dashboard';
+import CoursePage from './views/course-page/course-page';
 
 const dashboardRoutes = [
   // {
@@ -101,12 +103,26 @@ const dashboardRoutes = [
     component: UserForm,
     layout: '/forms'
   },
+  // {
+  //   path: '/course-content',
+  //   name: 'Course',
+  //   icon: 'sdf',
+  //   component: CourseContent,
+  //   layout: '/admin'
+  // }
   {
-    path: '/course-content',
-    name: 'Course',
+    path: '/dashboard',
+    name: 'Dashboard',
     icon: 'sdf',
-    component: CourseContent,
-    layout: '/admin'
+    component: CourseDashboard,
+    layout: '/dbLearningAI'
+  },
+  {
+    path: '/view-course',
+    name: 'View-Course',
+    icon: 'sdf',
+    component: CoursePage,
+    layout: '/dbLearningAI'
   }
 ];
 

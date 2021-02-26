@@ -21,8 +21,8 @@ ReactDOM.render(
       {/* <Route path="/admin" component={Admin} /> */}
       {/* <Route path="/rtl" component={RTL} /> */}
       <Route path="/forms" component={Forms} />
-      <Route path='/dbLearningAI/home' component={coursesHome}/>
-      <Route path="/dbLearningAI/view-course" component={coursesView}/>
+      <Route path='/dbLearningAI' component={coursesHome}/>
+      {/* <Route path="/dbLearningAI" component={coursesView}/> */}
       {/* <Redirect from="/" to="/dbLearningAI/home" /> */}
       <Redirect from="/" to="/forms/user-form" />
     </Switch>
