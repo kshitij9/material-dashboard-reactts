@@ -1,43 +1,41 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import ComplexButtons from '../ComplexButtons/ComplexButtons';
 
-import imagine1 from '../../assets/img/sidebar-1.jpg';
-// import imagine1 from "assets/img/sidebar-1.jpg";
-import imagine2 from 'assets/img/sidebar-2.jpg';
-import imagine3 from 'assets/img/sidebar-3.jpg';
-import imagine4 from 'assets/img/sidebar-4.jpg';
 
-import Button from '../CustomButtons/Button';
-
-interface Props {
-  bgImage: any;
+interface Props{
+  // bgImage: any;
   rtlActive?: any;
   fixedClasses: any;
-  bgColor: any;
+  // bgColor: any;
   handleFixedClick: any;
-  handleColorClick: any;
-  handleImageClick: any;
+  // handleColorClick: any;
+  // handleImageClick: any;
 }
 
 interface State {
   classes: string;
-  bg_checked: boolean;
-  bgImage: any;
+  // bg_checked: boolean;
+  // bgImage: any;
   themes: any;
   currentTheme: string;
   currentTextSize: string;
   currentTextSpacing: string;
+  currentTextSizeTitleIndex: number;
+  currentTextSpacingTitleIndex: number;
+  currentCursorSize: string;
+  currentThemeTitleIndex: number;
+  currentCursorTitleIndex: number;
+  images: Array<any>;
 }
 
-
 class FixedPlugin extends Component<Props, State> {
-  themes: any;
   constructor(props: Props) {
     super(props);
     this.state = {
       classes: 'dropdown show',
-      bg_checked: true,
-      bgImage: this.props.bgImage,
+      // bg_checked: true,
+      // bgImage: this.props.bgImage,
       themes: {
         inverted: {
           'filter': 'invert(100%)'
@@ -49,7 +47,7 @@ class FixedPlugin extends Component<Props, State> {
           'filter': 'saturate(0%)'
         },        
         normalTextSize: {
-          'font-size': '14px'
+          'font-size': 'inherit'
         },
         mediumTextSize: {
           'font-size': '20px'
@@ -65,17 +63,53 @@ class FixedPlugin extends Component<Props, State> {
         },
         largeTextSpacing: {
           'letter-spacing': '2px'
-        }
+        },
+        largerCursor: {
+          'cursor':"url('src/assets/img/cursor.png'), auto"
+        },
+        normalCursor: {
+          'cursor': 'default'
+        } 
       },
       currentTheme: 'normal',
       currentTextSize: 'normalTextSize',
-      currentTextSpacing: 'normalTextSpacing'
+      currentTextSpacing: 'normalTextSpacing',
+      currentTextSizeTitleIndex: 0,
+      currentTextSpacingTitleIndex: 0,
+      currentThemeTitleIndex: 0,
+      currentCursorTitleIndex: 0,
+      currentCursorSize: 'normalCursor',
+      images: [
+        {
+          url: '/static/images/grid-list/breakfast.jpg',
+          title: ['Normal Spacing','Medium Spacing','Large Spacing'],
+          type: 'TEXT_SPACING',
+          width: '98%',
+        },
+        {
+          url: '/static/images/grid-list/burgers.jpg',
+          title: ['Normal Size','Medium Size','Large Size'],
+          type: 'FONT_SIZE',
+          width: '98%',
+        },
+        {
+          url: '/static/images/grid-list/camera.jpg',
+          title: ['Normal', 'Invert Colors', 'Desaturate'],
+          type: 'THEME',
+          width: '98%',
+        },
+        {
+          url: '',
+          title: ['Normal Pointer', 'Large Pointer'],
+          type: 'POINTER',
+          width: '98%'
+        }
+      ]
     };
-    this.themes = {
-
-    }
     this.handleClick = this.handleClick.bind(this);
+    // this.handleWidgetClick = this.handleWidgetClick.bind(this);
   }
+
   handleClick() {
     this.props.handleFixedClick();
   }
@@ -92,57 +126,77 @@ class FixedPlugin extends Component<Props, State> {
   toggleTextSize = () => {
     if(this.state.currentTextSize === 'normalTextSize') {
       this.setState({
-        currentTextSize: 'mediumTextSize'
-      });
+        currentTextSize: 'mediumTextSize',
+        currentTextSizeTitleIndex: 1
+      },() => {this.setTheme(this.state.currentTextSize)});
     } else if(this.state.currentTextSize === 'mediumTextSize'){
       this.setState({
-        currentTextSize: 'largeTextSize'
-      });
+        currentTextSize: 'largeTextSize',
+        currentTextSizeTitleIndex: 2
+      },() => {this.setTheme(this.state.currentTextSize)});
     }
     else {
       this.setState({
-        currentTextSize: 'normalTextSize'
-      });
+        currentTextSize: 'normalTextSize',
+        currentTextSizeTitleIndex: 0
+      },() => {this.setTheme(this.state.currentTextSize)});
     }
-    this.setTheme(this.state.currentTextSize);
+  }
+
+  toggleCursorSize = () => {
+    if(this.state.currentCursorSize === 'normalCursor') {
+      this.setState({
+        currentCursorSize: 'largerCursor',
+        currentCursorTitleIndex: 1
+      },() => {this.setTheme(this.state.currentCursorSize)});
+    } else {
+      this.setState({
+        currentCursorSize: 'normalCursor',
+        currentCursorTitleIndex: 0
+      },() => {this.setTheme(this.state.currentCursorSize)});
+    }
   }
 
   toggleTheme = () => {
     if(this.state.currentTheme === 'normal') {
       this.setState({
-        currentTheme: 'desaturate'
-      });
+        currentTheme: 'desaturate',
+        currentThemeTitleIndex: 2
+      },() => {this.setTheme(this.state.currentTheme)});
     } else if(this.state.currentTheme === 'desaturate'){
       this.setState({
-        currentTheme: 'inverted'
-      });
+        currentTheme: 'inverted',
+        currentThemeTitleIndex: 1
+      },() => {this.setTheme(this.state.currentTheme)});
     }
     else {
       this.setState({
-        currentTheme: 'normal'
-      });
+        currentTheme: 'normal',
+        currentThemeTitleIndex: 0
+      },() => {this.setTheme(this.state.currentTheme)});
     }
-    this.setTheme(this.state.currentTheme);
   }
 
   toggleTextSpacing = () => {
     if(this.state.currentTextSpacing === 'normalTextSpacing') {
       this.setState({
-        currentTextSpacing: 'mediumTextSpacing'
-      });
+        currentTextSpacing: 'mediumTextSpacing',
+        currentTextSpacingTitleIndex: 1
+      },() => {this.setTheme(this.state.currentTextSpacing)});
     } else if(this.state.currentTextSpacing === 'mediumTextSpacing'){
       this.setState({
-        currentTextSpacing: 'largeTextSpacing'
-      });
+        currentTextSpacing: 'largeTextSpacing',
+        currentTextSpacingTitleIndex: 2
+      },() => {this.setTheme(this.state.currentTextSpacing)});
     }
     else {
       this.setState({
-        currentTextSpacing: 'normalTextSpacing'
-      });
+        currentTextSpacing: 'normalTextSpacing',
+        currentTextSpacingTitleIndex: 0
+      },() => {this.setTheme(this.state.currentTextSpacing)});
     }
-    this.setTheme(this.state.currentTextSpacing);
   }
-
+  
   render() {
     return (
       <div
@@ -154,154 +208,28 @@ class FixedPlugin extends Component<Props, State> {
           <div onClick={this.handleClick}>
             <i className="fa fa-cog fa-2x" />
           </div>
-          <ul className="dropdown-menu">
-            <li className="header-title">SIDEBAR FILTERS</li>
-            <li className="adjustments-line">
-              <a className="switch-trigger">
-                <div>
-                  <span
-                    className={
-                      this.props.bgColor === 'purple'
-                        ? 'badge filter badge-purple active'
-                        : 'badge filter badge-purple'
-                    }
-                    data-color="purple"
-                    onClick={() => {
-                      this.props.handleColorClick('purple');
-                    }}
-                  />
-                  <span
-                    className={
-                      this.props.bgColor === 'blue'
-                        ? 'badge filter badge-blue active'
-                        : 'badge filter badge-blue'
-                    }
-                    data-color="blue"
-                    onClick={() => {
-                      this.props.handleColorClick('blue');
-                    }}
-                  />
-                  <span
-                    className={
-                      this.props.bgColor === 'green'
-                        ? 'badge filter badge-green active'
-                        : 'badge filter badge-green'
-                    }
-                    data-color="green"
-                    onClick={() => {
-                      this.props.handleColorClick('green');
-                    }}
-                  />
-                  <span
-                    className={
-                      this.props.bgColor === 'red'
-                        ? 'badge filter badge-red active'
-                        : 'badge filter badge-red'
-                    }
-                    data-color="red"
-                    onClick={() => {
-                      this.props.handleColorClick('red');
-                    }}
-                  />
-                  <span
-                    className={
-                      this.props.bgColor === 'orange'
-                        ? 'badge filter badge-orange active'
-                        : 'badge filter badge-orange'
-                    }
-                    data-color="orange"
-                    onClick={() => {
-                      this.props.handleColorClick('orange');
-                    }}
-                  />
-                </div>
-              </a>
-            </li>
-            <li className="header-title">Images</li>
-            <li className={this.state.bgImage === imagine1 ? 'active' : ''}>
-              <a
-                className="img-holder switch-trigger"
-                onClick={() => {
-                  this.setState({ bgImage: imagine1 });
-                  this.props.handleImageClick(imagine1);
-                  this.toggleTheme();
-                }}
-              >
-                <img src={imagine1} alt="..." />
-              </a>
-            </li>
-            <li className={this.state.bgImage === imagine2 ? 'active' : ''}>
-              <a
-                className="img-holder switch-trigger"
-                onClick={() => {
-                  this.setState({ bgImage: imagine2 });
-                  this.props.handleImageClick(imagine2);
-                  this.toggleTextSize();
-                }}
-              >
-                <img src={imagine2} alt="..." />
-              </a>
-            </li>
-            <li className={this.state.bgImage === imagine3 ? 'active' : ''}>
-              <a
-                className="img-holder switch-trigger"
-                onClick={() => {
-                  this.setState({ bgImage: imagine3 });
-                  this.props.handleImageClick(imagine3);
-                  this.toggleTextSpacing();
-                }}
-              >
-                <img src={imagine3} alt="..." />
-              </a>
-            </li>
-            <li className={this.state.bgImage === imagine4 ? 'active' : ''}>
-              <a
-                className="img-holder switch-trigger"
-                onClick={() => {
-                  this.setState({ bgImage: imagine4 });
-                  this.props.handleImageClick(imagine4);
-                }}
-              >
-                <img src={imagine4} alt="..." />
-              </a>
-            </li>
-
-            <li className="button-container">
-              <div className="button-container">
-                <Button
-                  color="success"
-                  href="https://www.creative-tim.com/product/material-dashboard-react"
-                  target="_blank"
-                  fullWidth={true}
-                >
-                  Download free!
-                </Button>
-              </div>
-            </li>
-            <li className="button-container">
-              <div className="button-container">
-                <Button
-                  color="warning"
-                  href="https://www.creative-tim.com/product/material-dashboard-pro-react"
-                  target="_blank"
-                  fullWidth={true}
-                >
-                  Get PRO version
-                </Button>
-              </div>
-            </li>
-            <li className="button-container">
-              <Button
-                color="info"
-                fullWidth={true}
-                href="https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial"
-                target="_blank"
-              >
-                Documentation
-              </Button>
-            </li>
-            <li className="adjustments-line" />
-          </ul>
+          <div className="dropdown-menu">
+            <div className="header-title">Widgets</div>
+            <div className="complex-button">
+              <ComplexButtons image={this.state.images[1]} titleIndex={this.state.currentTextSizeTitleIndex} handleClick={this.toggleTextSize} />
+              <ComplexButtons image={this.state.images[0]} titleIndex={this.state.currentTextSpacingTitleIndex} handleClick={this.toggleTextSpacing} />
+              <ComplexButtons image={this.state.images[2]} titleIndex={this.state.currentThemeTitleIndex} handleClick={this.toggleTheme} /> 
+              <ComplexButtons image={this.state.images[3]} titleIndex={this.state.currentCursorTitleIndex} handleClick={this.toggleCursorSize} /> 
+              {/* {this.state.images.map((image) => {
+                switch(image.type) {
+                  case 'FONT_SIZE':
+                    
+                  break;
+                  case 'TEXT_SPACING':
+                    <ComplexButtons image={image} handleClick={this.toggleTextSpacing} />
+                  break; 
+                  case 'THEME':
+                    <ComplexButtons image={image} handleClick={this.toggleTheme} />   
+                }
+              })} */}
+            </div>
+              <div className="adjustments-line" />
+          </div>
         </div>
       </div>
     );

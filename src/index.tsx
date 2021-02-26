@@ -8,6 +8,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 // import RTL from './layouts/RTL';
 import Forms from './layouts/forms';
 import coursesHome from './layouts/courses-home';
+import coursesView from './layouts/courses-view';
 
 import 'assets/css/material-dashboard-react.css?v=1.6.0';
 

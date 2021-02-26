@@ -38,13 +38,20 @@ function Questions({ ...props }: any) {
 		},
 	];
 	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [answers, setAnswers] = useState([] as Array<number>);
 	const history = useHistory();
 	const goToDashboard = () => history.push('/dbLearningAI/home');
-	const handleAnswerOptionClick = () => {
+	const handleAnswerOptionClick = (index: number) => {
+		let currentAnswer = answers;
+		currentAnswer.push(index);
+		setAnswers(currentAnswer);
+		
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
-		} else {
+		} else if(nextQuestion === 1 && index === 1){
+			goToDashboard();
+		}else {
 			goToDashboard();
 		}
 	};
@@ -57,8 +64,8 @@ function Questions({ ...props }: any) {
 				<div className='question-text'>{questions[currentQuestion].questionText}</div>
 			</div>
 			<ul className='answer-section'>
-				{questions[currentQuestion].answerOptions.map((answerOption) => (
-					<li onClick={() => handleAnswerOptionClick()}>{answerOption.answerText}</li>
+				{questions[currentQuestion].answerOptions.map((answerOption, index) => (
+					<li onClick={() => handleAnswerOptionClick(index)}>{answerOption.answerText}</li>
 				))}
 			</ul>
 			<a onClick={goToDashboard}>Skip</a>

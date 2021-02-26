@@ -118,10 +118,10 @@ class Forms extends React.Component<Props, State> {
         <div ref="mainPanel">
           <div>{switchRoutes}</div>
           <FixedPlugin
-            handleImageClick={this.handleImageClick}
-            handleColorClick={this.handleColorClick}
-            bgColor={this.state.color}
-            bgImage={this.state.image}
+            // handleImageClick={this.handleImageClick}
+            // handleColorClick={this.handleColorClick}
+            // bgColor={this.state.color}
+            // bgImage={this.state.image}
             handleFixedClick={this.handleFixedClick}
             fixedClasses={this.state.fixedClasses}
           />
