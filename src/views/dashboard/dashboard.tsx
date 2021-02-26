@@ -1,20 +1,7 @@
 import React, { useState } from 'react';
 import { createStyles, Theme, makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import SettingsIcon from '@material-ui/icons/Settings';
-import { Person } from '@material-ui/icons';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -39,10 +26,6 @@ const theme = createMuiTheme({
     }
   },
 });
-
-// const theme = {
-//   fontSize: 'inherit'
-// }
 
 const drawerWidth = 240;
 
