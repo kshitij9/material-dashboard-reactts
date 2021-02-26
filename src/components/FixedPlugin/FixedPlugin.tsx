@@ -11,12 +11,18 @@ interface Props{
   handleFixedClick: any;
   // handleColorClick: any;
   // handleImageClick: any;
+  currentTheme?: any;
+  currentTextSize?: any;
+  currentTextSpacing?: any;
+  currentTextSizeTitleIndex?: any;
+  currentTextSpacingTitleIndex?: any;
+  currentThemeTitleIndex?: any;
+  currentCursorTitleIndex?: any;
+  currentCursorSize?: any;
 }
 
 interface State {
   classes: string;
-  // bg_checked: boolean;
-  // bgImage: any;
   themes: any;
   currentTheme: string;
   currentTextSize: string;
@@ -71,14 +77,14 @@ class FixedPlugin extends Component<Props, State> {
           'cursor': 'default'
         } 
       },
-      currentTheme: 'normal',
-      currentTextSize: 'normalTextSize',
-      currentTextSpacing: 'normalTextSpacing',
-      currentTextSizeTitleIndex: 0,
-      currentTextSpacingTitleIndex: 0,
-      currentThemeTitleIndex: 0,
-      currentCursorTitleIndex: 0,
-      currentCursorSize: 'normalCursor',
+      currentTheme: this.props.currentTheme ? this.props.currentTheme : 'normal',
+      currentTextSize: this.props.currentTextSize ? this.props.currentTextSize : 'normalTextSize' ,
+      currentTextSpacing: this.props.currentTextSpacing? this.props.currentTextSpacing : 'normalTextSpacing',
+      currentTextSizeTitleIndex: this.props.currentTextSizeTitleIndex? this.props.currentTextSizeTitleIndex : 0,
+      currentTextSpacingTitleIndex: this.props.currentTextSpacingTitleIndex? this.props.currentTextSpacingTitleIndex : 0,
+      currentThemeTitleIndex: this.props.currentThemeTitleIndex? this.props.currentThemeTitleIndex : 0,
+      currentCursorTitleIndex: this.props.currentCursorTitleIndex?this.props.currentCursorTitleIndex : 0 ,
+      currentCursorSize: this.props.currentCursorSize? this.props.currentCursorSize : 0,
       images: [
         {
           url: '/static/images/grid-list/breakfast.jpg',
@@ -107,7 +113,10 @@ class FixedPlugin extends Component<Props, State> {
       ]
     };
     this.handleClick = this.handleClick.bind(this);
-    // this.handleWidgetClick = this.handleWidgetClick.bind(this);
+    this.setTheme(this.state.currentTextSize);
+    this.setTheme(this.state.currentCursorSize);
+    this.setTheme(this.state.currentTheme);
+    this.setTheme(this.state.currentTextSpacing);
   }
 
   handleClick() {

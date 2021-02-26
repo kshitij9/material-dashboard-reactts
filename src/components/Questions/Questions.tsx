@@ -47,11 +47,13 @@ function Questions({ ...props }: any) {
 		setAnswers(currentAnswer);
 		
 		const nextQuestion = currentQuestion + 1;
-		if (nextQuestion < questions.length) {
-			setCurrentQuestion(nextQuestion);
-		} else if(nextQuestion === 1 && index === 1){
+		if(nextQuestion === 1 && index === 1){
 			goToDashboard();
-		}else {
+		}
+		else if (nextQuestion < questions.length) {
+			setCurrentQuestion(nextQuestion);
+		} else {
+			localStorage.setItem('answers', JSON.stringify(answers));
 			goToDashboard();
 		}
 	};
